@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>支付测试</title>
+</head>
+<body>
+
+    <div>金额：<input type="text" id="paymoney" name="money" /></div>
+    <div>
+        <label>跳转到支付页<input type="radio" checked="" name="type" value="form" /></label>
+        <label>获取json支付页信息<input type="radio" name="type" value="json" /></label>
+    </div>
+    <button id="pay">发起支付</button>
+
+    <form style='display: none' id='formpay' name='formpay' method='post' action='http://pay.sfapay.com/addons/pay/api/create'>
+        <input type='text' value='' name='money'             id='money' /><br />
+        <input type='text' value='' name='format'              id='format' /><br />
+         <input type='text' value='' name='goodsName'         id='goodsName' /><br />
+         <input type='text' value='' name='notifyURL'         id='notifyURL' /><br />
+        <input type='text' value='' name='returnURL'         id='returnURL' /><br />
+        <input type='text' value='' name='merchantOrderId'   id='merchantOrderId' /><br />
+        <input type='text' value='' name='pub'       id='pub' /><br />
+        <input type='text' value='' name='paytype'         id='paytype' /><br />
+        <input type='text' value='' name='sign'              id='sign' /><br />
+        <input type='submit' id='submitdemo1'>
+    </form>
+
+    <div id="json_pay" style="display:none">
+        <div>这是json返回的页面</div>
+        <div>
+            <img style="width:200px;height:200px" id="json_img" src="" />
+        </div>
+    </div>
+<script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.11.1/jquery.min.js"></script>
+<script>
+$(function(){
+
+    $('#pay').click(function(){
+        var type = $('input[type="radio"]:checked').val();
+        var money = $('input[name="money"]').val();
+        if(type=='form'){
+            $.post('pay.php',{type:type,money:money},function(res){
+                console.log(res)
+                //返回数据转为对象后赋值给页面上的隐藏表单，触发表单提交后会跳到支付页面
+                var data = JSON.parse(res);
+                $('#money').val(data.money);
+                $('#format').val(data.format);
+                $('#timestamp').val(data.timestamp);
+                $('#expire').val(data.expire);
+                $('#goodsName').val(data.goodsName);
+                $('#notifyURL').val(data.notifyURL);
+                $('#returnURL').val(data.returnURL);
+                $('input[name="merchantOrderId"]').val(data.merchantOrderId);
+                $('#pub').val(data.pub);
+                $('#paytype').val(data.paytype);
+                $('#sign').val(data.sign);
+                $('#submitdemo1').click();
+            })
+        }
+        if(type == 'json'){
+            $.post('jsonpay.php',{type:type,money:money},function(res){
+                console.log('用的是json',res)
+                //获取到json参数后可以自定义支付页面
+                var data = JSON.parse(res);
+                console.log(data)
+                $('#json_pay').show();
+                //$('#json_img').attr('src',"data:image/png;base64,"+data.img);
+                $('#json_img').attr('src',data.img);
+            })
+        }
+
+    })
+})
+</script>
+</body>
+</html>
