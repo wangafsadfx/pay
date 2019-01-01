@@ -22,6 +22,7 @@ $vsign = md5(md5($orderNo.$merchantOrderNo.$price.$realprice.$money.$paytype.$pa
 
 if ($vsign != $sign) {
     // return jsonError("key值不匹配");
+    file_put_contents("./logs/error_".time(). ".json", json_encode($_REQUEST));
     echo 'error';
 } else {
     $_REQUEST['time'] = time();
