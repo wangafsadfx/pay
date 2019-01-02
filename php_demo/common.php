@@ -4,15 +4,15 @@
 
 $config = [
 
-    'apiurl'    => 'http://sf.huishangquan.cn/addons/pay/api/create',//支付订单提交接口
+    'apiurl'    => 'http://pay.sfapay.com/addons/pay/api/create',//支付订单提交接口
 
-    'pub' => '$2y$10$0aATCLTT2Jfo0soGMH99G.yicDTYjUXm80.Nr7EBDFXE0s0xF12hy',//商家接口公钥
+    'pub' => '$2y$10$FSzlVdqp/PpEC3vmPDvcCeLcABov9/tR8uqZlC.jzLIz8MBAAQK5i',//商家接口公钥
 
-    'secretkey' => '$2y$10$csaQSCeZTW2yUUq8uvFaVeTL7VdNrjnrc0ZKM5h87J9bg4ntPJSm6',//商家后台密钥
+    'secretkey' => '$2y$10$YEIGbkPo7vojHkvga75vlOb8ESHfikWAPYN0xZfaJoCYsH1tBt4LK',//商家后台密钥
 
-    'notifyURL' => 'http://sf.huishangquan.cn/demo1/paynotify.php', //支付成功回调地址
+    'notifyURL' => 'http://demo.sfapay.com/demo1/paynotify.php', //支付成功回调地址
 
-    'returnURL' => 'http://sf.huishangquan.cn/demo1/payreturn.php', //支付成功跳转页面
+    'returnURL' => 'http://demo.sfapay.com/demo1/payreturn.php', //支付成功跳转页面
 
     'paytype' => ['wechat','alipay'],//支付方式
 

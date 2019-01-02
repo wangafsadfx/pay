@@ -23,7 +23,7 @@ if ($sign != $new_sign) {
 // 此处在您数据库中查询：此笔订单号是否已经异步通知给您付款成功了。如成功了，就给他返回一个支付成功的展示。
 echo "恭喜，支付成功!，订单号：{$out_order_id}。";
 $sign = md5(md5($out_order_id) . $config['secretkey']);
-echo "<a href='http://sf.huishangquan.cn/addons/pay/api/query/out_order_id/{$out_order_id}/sign/{$sign}'>详情</a>";
+echo "<a href='http://pay.sfapay.com/addons/pay/api/query/out_order_id/{$out_order_id}/sign/{$sign}'>详情</a>";
 echo "<br/><a href='list.php'>订单列表</a>";
 
 
