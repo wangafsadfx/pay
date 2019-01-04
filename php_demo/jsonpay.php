@@ -12,7 +12,7 @@ $_POST['money'] = empty($_POST['money']) ?1:$_POST['money'];
 $money = floatval(sprintf("%.2f",$_POST['money'])); //支付金额
 
 // $money = floatval(sprintf("%.2f",100)); //支付金额
-$pub = $config['pub']; //商家接口公钥
+$pub = $config['pub']; //商户号
 $secretKey = $config['secretkey']; //商家后台密钥
 $paytype = $config['paytype'][1];
 
@@ -25,7 +25,7 @@ $param = array(
     'notifyURL' => $notifyURL, //选填。支付成功后系统会对该地址发起回调，通知支付成功的消息。
     'returnURL' => $returnURL, //选填。成功成功后系统会跳转页面到该地址上。
     'merchantOrderId' => $merchantOrderId, //必填。商户自定的订单号，该订单号将后在后台展示。
-    'pub' => $pub, //必填。商家接口公钥
+    'pub' => $pub, //必填。商户号
     'paytype' => $paytype,//支付类型，支付宝、微信，默认值支付宝
     'sign' => $sign, //必填。
 );
